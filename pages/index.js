@@ -2,7 +2,7 @@ import Container from "@mui/material/Container";
 
 const Homepage = () => {
   return (
-    <Container maxWidth="sm">
+    <Container>
     <h1>Home Page</h1>
     <p>lorem*15</p>
     </Container>
