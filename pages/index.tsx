@@ -1,6 +1,9 @@
 import Container from "@mui/material/Container";
 
-const Homepage = () => {
+interface Props {
+}
+
+const Homepage = (_: Props) => {
   return (
     <Container>
     <h1>Home Page</h1>

@@ -5,7 +5,20 @@ import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import MuiLink from '@mui/material/Link';
 
-export const NextLinkComposed = React.forwardRef(function NextLinkComposed(props, ref) {
+interface Props {
+  to: any,
+  linkAs?: any,
+  href?: string,
+  replace?: boolean,
+  scroll?: boolean,
+  passHref?: boolean,
+  shallow?: boolean,
+  prefetch?: boolean,
+  locale?: string,
+  className: any
+}
+
+export const NextLinkComposed = React.forwardRef(function NextLinkComposed(props: Props, ref: any) {
   const { to, linkAs, href, replace, scroll, passHref, shallow, prefetch, locale, ...other } =
     props;
 
@@ -25,9 +38,18 @@ export const NextLinkComposed = React.forwardRef(function NextLinkComposed(props
   );
 });
 
+interface LinkProps {
+  activeClassName: any,
+  as: any,
+  className: any,
+  href: any,
+  noLinkStyle: any,
+  role: any
+}
+
 // A styled version of the Next.js Link component:
 // https://nextjs.org/docs/#with-link
-const Link = React.forwardRef(function Link(props, ref) {
+const Link = React.forwardRef(function Link(props: LinkProps, ref: any) {
   const {
     activeClassName = 'active',
     as: linkAs,

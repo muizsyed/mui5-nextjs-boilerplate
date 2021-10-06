@@ -3,7 +3,7 @@ import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import { styled } from "@mui/system";
 
-const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
+const Offset = styled("div")(({ theme }: any) => theme.mixins.toolbar);
 
 const Header = () => {
   return (
