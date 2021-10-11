@@ -36,11 +36,7 @@ const MyApp = (props) => {
 }
 
 MyApp.getInitialProps = async (appContext) => {
-
   const initialProps = await App.getInitialProps(appContext);
-
-  App.getInitialProps(appContext);
-
   return { 
     ...initialProps,
     appProps: {
