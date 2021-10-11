@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import App from 'next/app';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
@@ -25,26 +26,28 @@ const MyApp = (props) => {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Header />
+        
+        { !pageProps?.statusCode && <Header /> }
         <Component {...pageProps} />
-        <Footer {...appProps} />
+        { !pageProps?.statusCode && <Footer {...appProps} /> }
       </ThemeProvider>
     </CacheProvider>
   )
 }
 
 MyApp.getInitialProps = async (appContext) => {
-  let appProps = {};
-    if (appContext.Component.getInitialProps) {
-      appProps = await appContext.Component.getInitialProps(appContext.ctx);
-    }
 
-    return { 
-      appProps: {
-        version: serverRuntimeConfig.version,
-        gitCommitHash: serverRuntimeConfig.gitCommitHash
-      }
+  const initialProps = await App.getInitialProps(appContext);
+
+  App.getInitialProps(appContext);
+
+  return { 
+    ...initialProps,
+    appProps: {
+      version: serverRuntimeConfig.version,
+      gitCommitHash: serverRuntimeConfig.gitCommitHash
     }
+  }
 }
 
 export default MyApp;
