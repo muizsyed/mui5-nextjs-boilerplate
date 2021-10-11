@@ -9,11 +9,14 @@ import theme from '../styles/theme';
 import Header from "@components/Header";
 import Footer from '@components/Footer';
 
-const clientSideEmotionCache = createEmotionCache();
+import getConfig from 'next/config';
 
-export default function MyApp(props) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-  
+const clientSideEmotionCache = createEmotionCache();
+const { serverRuntimeConfig } = getConfig();
+
+const MyApp = (props) => {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps, appProps } = props;
+
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -24,8 +27,24 @@ export default function MyApp(props) {
         <CssBaseline />
         <Header />
         <Component {...pageProps} />
-        <Footer />
+        <Footer {...appProps} />
       </ThemeProvider>
     </CacheProvider>
   )
 }
+
+MyApp.getInitialProps = async (appContext) => {
+  let appProps = {};
+    if (appContext.Component.getInitialProps) {
+      appProps = await appContext.Component.getInitialProps(appContext.ctx);
+    }
+
+    return { 
+      appProps: {
+        version: serverRuntimeConfig.version,
+        gitCommitHash: serverRuntimeConfig.gitCommitHash
+      }
+    }
+}
+
+export default MyApp;

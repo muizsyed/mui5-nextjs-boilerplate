@@ -6,6 +6,10 @@ import {
 } from '@mui/material';
 
 import Copyright from '@components/Copyright';
+import getConfig from 'next/config';
+
+
+const { publicRuntimeConfig } = getConfig();
 
 const FooterPanel = styled(Box)({
     borderTop: '1px solid #EEE',
@@ -14,12 +18,12 @@ const FooterPanel = styled(Box)({
     padding: '0.5em'
 });
 
-const Footer = () => {
-    
+const Footer = ({ version, gitCommitHash }) => {
     return (
         <FooterPanel component="footer">
             <Container>
                 <Copyright />
+                <small >Version: {version}+{gitCommitHash}</small>
             </Container>   
         </FooterPanel>
     );
