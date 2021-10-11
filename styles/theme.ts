@@ -12,6 +12,9 @@ let theme = createTheme({
         },
         secondary: pink,
     },
+    shape: {
+        borderRadius: 0
+    }
 });
 
 theme = responsiveFontSizes(theme);
