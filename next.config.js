@@ -8,6 +8,7 @@ const { version } = require('./package.json');
 const nextConfig = {
     /* config options here */
     reactStrictMode: true,
+    poweredByHeader: false,
     serverRuntimeConfig: {
         gitCommitHash: process.env.GIT_COMMIT_HASH,
         version
